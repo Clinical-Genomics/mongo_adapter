@@ -12,19 +12,18 @@ from shutil import rmtree
 from setuptools import find_packages, setup, Command
 
 # Package meta-data.
-NAME = 'count_variants'
-DESCRIPTION = 'Count variants in VCF files based on different criterias'
-URL = 'https://github.com/moonso/count_variants'
+NAME = 'mongo_adapter'
+DESCRIPTION = 'A python interface to handle connection to a mongod instance'
+URL = 'https://github.com/moonso/mongo_adapter'
 EMAIL = 'mans.magnusson@scilifelab.se'
 AUTHOR = 'Måns Magnusson'
 
-# What packages are required for this module to be executed?
-REQUIRED = parse_reqs()
+here = os.path.abspath(os.path.dirname(__file__))
 
 def parse_reqs(req_path='./requirements.txt'):
     """Recursively parse requirements from nested pip files."""
     install_requires = []
-    with codecs.open(req_path, 'r') as handle:
+    with io.open(os.path.join(here, 'requirements.txt'), encoding='utf-8') as handle:
         # remove comments and empty lines
         lines = (line.strip() for line in handle
                  if line.strip() and not line.startswith('#'))
@@ -41,13 +40,13 @@ def parse_reqs(req_path='./requirements.txt'):
 
     return install_requires
 
+# What packages are required for this module to be executed?
+REQUIRED = parse_reqs()
 
 # The rest you shouldn't have to touch too much :)
 # ------------------------------------------------
 # Except, perhaps the License and Trove Classifiers!
 # If you do change the License, remember to change the Trove Classifier for that!
-
-here = os.path.abspath(os.path.dirname(__file__))
 
 # Import the README and use it as the long-description.
 # Note: this will only work if 'README.rst' is present in your MANIFEST.in file!
@@ -106,9 +105,6 @@ setup(
     # If your package is a single module, use this instead of 'packages':
     # py_modules=['mypackage'],
 
-    # entry_points={
-    #     'console_scripts': ['mycli=mymodule:cli'],
-    # },
     install_requires=REQUIRED,
     include_package_data=True,
     license='MIT',
