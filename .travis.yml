@@ -14,7 +14,7 @@ script:
     - py.test -rxs tests/
 
 install:
-    - pip install -r requirements.txt
+    - pip install -e .
 
 notifications:
     email: false

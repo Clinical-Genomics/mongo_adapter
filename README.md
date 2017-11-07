@@ -123,3 +123,5 @@ class MongoAdapter(object):
 
 
 [travis-url]: https://travis-ci.org/moonso/mongo_adapter
+[travis-img]: https://img.shields.io/travis/moonso/mongo_adapter/master.svg?style=flat-square
+
