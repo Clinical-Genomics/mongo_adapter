@@ -1,5 +1,7 @@
 # Mongo Adapter
 
+[![Build Status][travis-img]][travis-url]
+
 A python implementation of a mongo adapter.
 
 The idea is to make a base class that handles the connection to a mongod instance.
@@ -118,3 +120,6 @@ class MongoAdapter(object):
     def __str__(self):
         return "MongoAdapter(db={0})".format(self.db)
 ```
+
+
+[travis-url]: https://travis-ci.org/moonso/mongo_adapter
