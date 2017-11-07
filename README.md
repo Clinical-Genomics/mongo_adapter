@@ -16,10 +16,9 @@ from mongo_adapter import MongoAdapter, get_client
 
 db_name = 'test'
 client = get_client()
-adapter = MongoAdapter(client)
-adapter.setup(dbname)
+adapter = MongoAdapter(client, db_name)
 
-assert adapter.db == db_name
+assert adapter.db_name == db_name
 ```
 
 ## installation
