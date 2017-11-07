@@ -22,6 +22,21 @@ adapter.setup(dbname)
 assert adapter.db == db_name
 ```
 
+## installation
+
+**git:**
+
+```bash
+git clone https://github.com/moonso/mongo_adapter
+cd mongo_adapter
+pip install --editable .
+```
+
+**pip:**
+```bash
+pip install mongo_adapter
+```
+
 
 ## Intended usage
 
