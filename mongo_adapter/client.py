@@ -20,6 +20,22 @@ except ImportError:
 
 LOG = logging.getLogger(__name__)
 
+def check_connection(client):
+    """Check if the mongod process is running
+    
+    Args:
+        client(MongoClient)
+    
+    Returns:
+        bool
+    """
+    try:
+        client.server_info()
+    except ServerSelectionTimeoutError as err:
+        raise InterfaceError("Seems like mongod is not running")
+    
+    return True
+
 
 def get_client(host='localhost', port=27017, username=None, password=None,
               uri=None, mongodb=None, timeout=20):
@@ -49,6 +65,9 @@ def get_client(host='localhost', port=27017, username=None, password=None,
     except ServerSelectionTimeoutError as err:
         LOG.warning("Connection Refused")
         raise InterfaceError
+    
+    LOG.debug("Check if mongod is running")
+    check_connection(client)
 
     LOG.info("Connection established")
     return client

@@ -21,7 +21,7 @@ class MongoAdapter(object):
     
     def setup(self, database):
         """Setup connection to a database"""
-        self.db = database
+        self.db = self.client[database]
         # Specify collections that will be used here when overriding
         # eg self.food_collection = self.db.food etc
     
