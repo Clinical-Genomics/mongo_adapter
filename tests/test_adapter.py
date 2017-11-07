@@ -7,4 +7,4 @@ def test_setup(mongo_client):
     
     adapter.setup(db_name)
     
-    assert adapter.db == db_name
+    assert adapter.db_name == db_name
