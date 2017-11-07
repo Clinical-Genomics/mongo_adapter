@@ -8,3 +8,12 @@ def test_setup(mongo_client):
     adapter.setup(db_name)
     
     assert adapter.db_name == db_name
+
+def test_setup_flask(flask_app):
+    db_name = flask_app.config['MONGO_DBNAME']
+    
+    adapter = MongoAdapter()
+    
+    adapter.init_app(flask_app)
+    
+    assert adapter.db_name == db_name
