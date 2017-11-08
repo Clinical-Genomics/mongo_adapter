@@ -15,27 +15,26 @@ class MongoAdapter(object):
         self.db_name = None
         if (db_name and client):
             self.setup(database)
-    
+
     def init_app(self, app):
         """Setup via Flask"""
         host = app.config.get('MONGO_HOST', 'localhost')
         port = app.config.get('MONGO_PORT', 27017)
-        db_name = app.config['MONGO_DBNAME']
-        LOG.info("connecting to database: %s:%s/%s", host, port, db_name)
-        self.setup(db_name=db_name, db=app.extensions['pymongo']['MONGO'][1])
-        
-    
-    def setup(self, db_name, db=None):
+        self.db_name = app.config['MONGO_DBNAME']
+        self.client = app.extensions['pymongo']['MONGO'][0]
+        self.db = app.extensions['pymongo']['MONGO'][1]
+        LOG.info("connecting to database: %s:%s/%s", host, port, self.db_name)
+
+    def setup(self, db_name):
         """Setup connection to a database
         
         Args:
             db_name(str)
             db(pymongo.Database)
         """
-        if db:
-            self.db = db
-            self.db_name = db.name
-        else:
+        if self.client is None:
+            raise SyntaxError("No client is available")
+        if self.db is None:
             self.db = self.client[db_name]
             self.db_name = db_name
         LOG.info("Use database %s", self.db_name)

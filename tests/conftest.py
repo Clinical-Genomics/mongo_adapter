@@ -17,7 +17,8 @@ class MockFlaskApp(object):
         self.config['MONGO_PORT'] = port
         self.config['MONGO_HOST'] = host
         
-        self.extensions['pymongo']['MONGO'] = ['', client[db_name]]
+        # This is how flaskpymongo sets it up:
+        self.extensions['pymongo']['MONGO'] = [client, client[db_name]]
 
 @pytest.fixture(scope='function')
 def mongo_client(request):
