@@ -45,8 +45,8 @@ The intended usage is here illustrated with an example
 from mongo_adapter import MongoAdapter, get_client
 
 class LibraryAdapter(MongoAdapter):
-	def setup(self, db_name='library'):
-		"""Overrides the basic setup method"""
+    def setup(self, db_name='library'):
+        """Overrides the basic setup method"""
         if self.client is None:
             raise SyntaxError("No client is available")
         if self.db is None:
@@ -55,22 +55,22 @@ class LibraryAdapter(MongoAdapter):
 
         self.books_collection = self.db.book
         self.user_collection = self.db.book
-	
-	def add_book(self, title, author):
-		"""Add a book to the books collection"""
-		result = self.books_collection.insert_one(
-			{
-				'title': title,
-				'author': author
-			}
-		)
-		return result
+
+    def add_book(self, title, author):
+        """Add a book to the books collection"""
+        result = self.books_collection.insert_one(
+            {
+                'title': title,
+                'author': author
+            }
+        )
+        return result
 
 if __name__ == '__main__':
-	client = get_client()
-	adapter = LibraryAdapter(client, database='library')
-	
-	adapter.add_book('Moby Dick', 'Herman Melville')
+    client = get_client()
+    adapter = LibraryAdapter(client, database='library')
+
+    adapter.add_book('Moby Dick', 'Herman Melville')
 
 ```
 
