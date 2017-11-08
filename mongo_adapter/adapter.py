@@ -14,7 +14,7 @@ class MongoAdapter(object):
         self.db = None
         self.db_name = None
         if (db_name and client):
-            self.setup(database)
+            self.setup(db_name)
 
     def init_app(self, app):
         """Setup via Flask"""
