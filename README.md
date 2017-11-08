@@ -53,8 +53,8 @@ class LibraryAdapter(MongoAdapter):
             self.db = self.client[db_name]
             self.db_name = db_name
 
-		self.books_collection = self.db.book
-		self.user_collection = self.db.book
+        self.books_collection = self.db.book
+        self.user_collection = self.db.book
 	
 	def add_book(self, title, author):
 		"""Add a book to the books collection"""
