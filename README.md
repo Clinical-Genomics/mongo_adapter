@@ -7,7 +7,8 @@ A python implementation of a mongo adapter.
 The idea is to make a base class that handles the connection to a mongod instance.
 It is nice to handle the connection in the same way for different python projects that involves a mongo database.
 
-The Mongo Adapter takes a client as init argument and then we connect to a database with `setup(database)`, forunately `mongo_adapter` can handle the client part as well.
+The Mongo Adapter takes a client as init argument and then we connect to a database with `setup(database)`, 
+fortunately `mongo_adapter` can handle the client part as well.
 
 **Example:**
 
@@ -19,6 +20,24 @@ client = get_client()
 adapter = MongoAdapter(client, db_name)
 
 assert adapter.db_name == db_name
+```
+
+## Testing
+
+The package can be used for testing as well
+
+**Example:**
+
+```python
+from mongo_adapter import MongoAdapter, get_client
+import mongomock
+
+db_name = 'test'
+uri = "mongomock://"
+client = get_client(uri=uri)
+adapter = MongoAdapter(client, db_name)
+
+assert isinsance(client, mongomock.MongoClient)
 ```
 
 ## installation
@@ -151,6 +170,7 @@ class MongoAdapter(object):
         LOG.info("Use database %s", self.db_name)
     
 ```
+
 
 
 [travis-url]: https://travis-ci.org/moonso/mongo_adapter

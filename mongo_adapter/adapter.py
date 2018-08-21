@@ -3,7 +3,10 @@ import logging
 LOG = logging.getLogger(__name__)
 
 class MongoAdapter(object):
-    """Adapter for communicating with a mongo database"""
+    """Adapter for communicating with a mongo database
+    
+    Instantiate with a mongo client from mongoadapter.get_client.
+    """
     def __init__(self, client=None, db_name=None):
         """
         Args:
@@ -17,7 +20,7 @@ class MongoAdapter(object):
             self.setup(db_name)
 
     def init_app(self, app):
-        """Setup via Flask"""
+        """Setup via Flask-pymongo"""
         host = app.config.get('MONGO_HOST', 'localhost')
         port = app.config.get('MONGO_PORT', 27017)
         self.db_name = app.config['MONGO_DBNAME']
