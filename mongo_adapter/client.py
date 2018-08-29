@@ -59,7 +59,7 @@ def get_client(host='localhost', port=27017, username=None, password=None,
 
     """
     # for testing only
-    if uri.startswith("mongomock://"):
+    if (uri and uri.startswith("mongomock://")):
         LOG.warning("Use mongomock backend")
         return MockClient(host=host, port=port)
 
