@@ -43,7 +43,7 @@ def check_connection(client):
 
 
 def get_client(host='localhost', port=27017, username=None, password=None,
-              uri=None, mongodb=None, timeout=20):
+              uri=None, timeout=20, authdb=None):
     """Get a client to the mongo database
 
     Args:
@@ -51,7 +51,7 @@ def get_client(host='localhost', port=27017, username=None, password=None,
         port(int): Port of database
         username(str)
         password(str)
-        uri(str)
+        uri(str): If a certain uri should be used
         timeout(int): How long should the client try to connect
 
     Returns:
@@ -67,6 +67,8 @@ def get_client(host='localhost', port=27017, username=None, password=None,
         if username and password:
             uri = ("mongodb://{}:{}@{}:{}"
                    .format(quote_plus(username), quote_plus(password), host, port))
+            if authdb:
+                uri += '/{}'.format(authdb)
         else:
             uri = ("mongodb://{0}:{1}".format(host, port))
     
