@@ -43,7 +43,7 @@ def check_connection(client):
 
 
 def get_client(host='localhost', port=27017, username=None, password=None,
-              uri=None, timeout=20, authdb=None):
+              uri=None, timeout=30000, authdb=None):
     """Get a client to the mongo database
 
     Args:
@@ -78,6 +78,8 @@ def get_client(host='localhost', port=27017, username=None, password=None,
     # nodelist is a list of tuples with (<host>,<port>)
     host = uri_info['nodelist'][0][0]
     port = uri_info['nodelist'][0][1]
+
+    host_port = ",".join(["".join([str(item[0]), ":", str(item[1])]) for item in uri_info['nodelist']])
     username = uri_info['username']
     password = uri_info['password']
 
@@ -86,7 +88,7 @@ def get_client(host='localhost', port=27017, username=None, password=None,
     if password:
         pwd = '******'
 
-    log_uri = "mongodb://{}:{}@{}:{}".format(username,pwd,host,port)
+    log_uri = "mongodb://{}:{}@{}".format(username,pwd,host_port)
     LOG.info("Connecting to uri:%s", log_uri)
     
     try:
