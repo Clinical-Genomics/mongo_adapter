@@ -76,10 +76,8 @@ def get_client(host='localhost', port=27017, username=None, password=None,
     # Will raise pymongo.errors.InvalidURI if incorrect uri
     uri_info = uri_parser.parse_uri(uri)
     # nodelist is a list of tuples with (<host>,<port>)
-    host = uri_info['nodelist'][0][0]
-    port = uri_info['nodelist'][0][1]
-
     host_port = ",".join(["".join([str(item[0]), ":", str(item[1])]) for item in uri_info['nodelist']])
+
     username = uri_info['username']
     password = uri_info['password']
 
